@@ -1,16 +1,16 @@
 # unityexport
 
 This package modifies Unity's import process of Maya files, enabling you to
-register callbacks of type MSceneMessage.kBeforeExport. These callbacks will be
-invoked when Unity converts your native Maya file to FBX in the background. It
-also registers a callback that automatically adjusts the FBX export settings to
-ensure blend shape data and animations can properly import into Unity 4.3 and
+register callbacks of type `MSceneMessage.kBeforeExport`. These callbacks will
+be invoked when Unity converts your native Maya file to FBX in the background.
+It also registers a callback that automatically adjusts the FBX export settings
+to ensure blend shape data and animations can properly import into Unity 4.3 and
 newer, when using Maya 2012 or newer.
 
 To use it, simply import it in your studio-wide userSetup.py script. Thereafter,
-if the unityexport.unity_project_version is not None, you can register any
-callbacks you wish using the MSceneMessage.kBeforeExport type. For instance, the
-following example userSetup script registers a callback that automatically
+if the `unityexport.unity_project_version` is not `None`, you can register any
+callbacks you wish using the `MSceneMessage.kBeforeExport` type. For instance,
+the following example userSetup script registers a callback that automatically
 creates a locator in the scene each time a file is sent to Unity:
 
 ```python

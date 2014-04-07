@@ -32,7 +32,7 @@ def configure_fbx_export_settings(*args):
     # make adjustments to FBX exporter settings to accommodate blend shapes
     if maya_version >= 2012:
         # NOTE: must use MEL because Python version of FBX commands don't work
-        mel.eval('FBXExportInAscii -v true;')  # enable for debugging
+        # mel.eval('FBXExportInAscii -v true;')  # enable for debugging
         mel.eval('FBXExportFileVersion -v FBX201100;')
         mel.eval('FBXExportHardEdges -v false;')
 

@@ -27,14 +27,14 @@ def configure_fbx_export_settings(*args):
     A callback to force adjustments to FBX export settings before export.
     @param args: A method signature requirement.
     """
-    if unity_project_version[0] > 5:
+    # NOTE: must use MEL because Python version of FBX commands don't work
+    # mel.eval('FBXExportInAscii -v true;')  # enable for debugging
+    mel.eval('FBXExportHardEdges -v false;')
+    if unity_project_version[0] >= 5:
         return
     # make adjustments to FBX exporter settings to accommodate blend shapes
     if maya_version >= 2012:
-        # NOTE: must use MEL because Python version of FBX commands don't work
-        # mel.eval('FBXExportInAscii -v true;')  # enable for debugging
         mel.eval('FBXExportFileVersion -v FBX201100;')
-        mel.eval('FBXExportHardEdges -v false;')
 
 
 def get_unity_project_version():

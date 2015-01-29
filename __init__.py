@@ -25,7 +25,7 @@ import maya.OpenMaya as om
 def configure_fbx_export_settings(*args):
     """
     A callback to force adjustments to FBX export settings before export.
-    @param args: A method signature requirement.
+    :param args: A method signature requirement.
     """
     # NOTE: must use MEL because Python version of FBX commands don't work
     # mel.eval('FBXExportInAscii -v true;')  # enable for debugging
@@ -44,7 +44,7 @@ def get_unity_project_version():
         file 'FBXMayaMain.mel' in a folder 'Temp'. It then looks for the
         'ProjectSettings.asset' file in a 'ProjectSettings' folder sibling to
         the 'Temp' folder.
-    @return: A tuple containing (major, minor, maintenance) integers for the
+    :return: A tuple containing (major, minor, maintenance) integers for the
         Unity version of the project from which Maya was launched, if it was
         launched by Unity; otherwise, None.
     """
@@ -81,7 +81,7 @@ def get_startup_script():
     """
     Gets the path to the startup script specified with the '-script' flag in the
         command-line arguments, if there was one.
-    @return: The path to the startup script if there was one, otherwise None.
+    :return: The path to the startup script if there was one, otherwise None.
     """
     try:
         return sys.argv[sys.argv.index('-script') + 1]
@@ -94,7 +94,7 @@ def modify_fbx_export_script(path_to_fbx_export_script):
     Modifies the local copy of FBXMayaExport.mel in the Unity project's Temp
         folder to invoke the FBXExport command through the file command, in
         order to properly send MSceneMessages before the export happens.
-    @param path_to_fbx_export_script: Path to the FBXMayaExport.mel script in
+    :param path_to_fbx_export_script: Path to the FBXMayaExport.mel script in
         the Temp folder of the Unity project hosting the Maya session.
     """
     with open(path_to_fbx_export_script) as f:
@@ -108,9 +108,9 @@ def modify_fbx_export_script(path_to_fbx_export_script):
         f.write(contents)
 
 
-## the version of Maya currently running
+# the version of Maya currently running
 maya_version = mel.eval('getApplicationVersionAsFloat();')
-## the version of Unity being used by the project hosting the Maya instance
+# the version of Unity being used by the project hosting the Maya instance
 unity_project_version = get_unity_project_version()
 
 # perform actions if the current Maya instance is hosted by Unity

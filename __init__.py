@@ -42,8 +42,7 @@ def get_unity_project_version():
     Get the version of the Unity project that launched Maya. This method works
         by first looking for a '-script' command line argument, whose value is a
         file 'FBXMayaMain.mel' in a folder 'Temp'. It then looks for the
-        'ProjectSettings.asset' file in a 'ProjectSettings' folder sibling to
-        the 'Temp' folder.
+        'guidmapper' file in a 'Library' folder sibling to the 'Temp' folder.
     :return: A tuple containing (major, minor, maintenance) integers for the
         Unity version of the project from which Maya was launched, if it was
         launched by Unity; otherwise, None.
@@ -55,14 +54,12 @@ def get_unity_project_version():
             os.path.basename(directory) == 'Temp' and
             script == 'FBXMayaMain.mel'
         ):
-            project_settings_asset_path = os.path.join(
-                os.path.dirname(directory),
-                'ProjectSettings',
-                'ProjectSettings.asset'
+            guidmapper_path = os.path.join(
+                os.path.dirname(directory), 'Library', 'guidmapper'
             )
-            if not os.path.exists(project_settings_asset_path):
+            if not os.path.exists(guidmapper_path):
                 return None
-            with open(project_settings_asset_path) as f:
+            with open(guidmapper_path) as f:
                 return tuple(
                     map(
                         int,

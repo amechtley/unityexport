@@ -54,12 +54,16 @@ def get_unity_project_version():
             os.path.basename(directory) == 'Temp' and
             script == 'FBXMayaMain.mel'
         ):
-            guidmapper_path = os.path.join(
+            mapper_path = os.path.join(
                 os.path.dirname(directory), 'Library', 'guidmapper'
             )
-            if not os.path.exists(guidmapper_path):
+            if not os.path.exists(mapper_path):
+                mapper_path = os.path.join(
+                    os.path.dirname(directory), 'Library', 'ScriptMapper'
+                )
+            if not os.path.exists(mapper_path):
                 return None
-            with open(guidmapper_path) as f:
+            with open(mapper_path) as f:
                 return tuple(
                     map(
                         int,
